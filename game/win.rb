@@ -7,7 +7,8 @@ class Win
 
   def initialize
     @game_board = []  # populated with current game board by game_over? in Game class
-    @wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    # @wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    @wins = []
     @win = []  # populated with winning positions by get_win()
   end
 
@@ -19,6 +20,31 @@ class Win
   # Method to determine if the game board is full (endgame condition)
   def board_full?
     @game_board.count("") == 0
+  end
+
+  # Method to calculate horizontal winning positions
+  def get_h_wins(size)
+
+  end
+
+  # Method to calculate vertical winning positions
+  def get_v_wins(size)
+
+  end  
+
+  # Method to calculate top-left diagonal winning positions
+  def get_d_1_wins(size)
+
+  end
+
+  # Method to calculate top-right diagonal winning positions
+  def get_d_2_wins(size)
+
+  end
+
+  # Method to populate @wins array with all winning positions
+  def populate_wins
+
   end
 
   # Method to update @win with the winning positions and return true if player won
