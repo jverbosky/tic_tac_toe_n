@@ -6,7 +6,6 @@ class Board
 
   def initialize(size)
     @game_board = Array.new(size*size) { |i| "" }
-    # @game_board = ["", "", "", "", "", "", "", "", ""]  # new empty game board
   end
 
   # Method to determine if specfied position is open on @game_board
