@@ -39,9 +39,9 @@ class Game
     @board_index = ""  # board array index value (based on @move)
   end
 
-  # Method to output the game board
+  # Method to output the game board based on user-specified size
   def output_board
-    rows = @board.game_board.each_slice(3).to_a
+    rows = @board.game_board.each_slice(@size).to_a
   end
 
   # Method to handle player type selection
