@@ -474,6 +474,53 @@ class TestBoard < Minitest::Test
     assert_equal(false, result)
   end
 
+  def test_49_verify_get_winning_positions_3x3
+    positions = [0, 1, 4, 8]  # diagonal 1 win = [0, 4, 8]
+    size = 3
+    board = Array.new(size*size) { |i| "" }
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    win.get_win(positions)
+    result = win.win
+    assert_equal([0, 4, 8], result)
+  end
+
+  def test_50_verify_get_winning_positions_4x4
+    positions = [0, 1, 3, 6, 9, 12]  # diagonal 2 win = [3, 6, 9, 12]
+    size = 4
+    board = Array.new(size*size) { |i| "" }
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    win.get_win(positions)
+    result = win.win
+    assert_equal([3, 6, 9, 12], result)
+  end
+
+  def test_51_verify_get_winning_positions_5x5
+    positions = [0, 1, 6, 11, 13, 16, 21, 24]  # vertical win = [1, 6, 11, 16, 21]
+    size = 5
+    board = Array.new(size*size) { |i| "" }
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    win.get_win(positions)
+    result = win.win
+    assert_equal([1, 6, 11, 16, 21], result)
+  end
+
+  def test_52_verify_get_winning_positions_6x6
+    positions = [0, 9, 12, 13, 14, 15, 16, 17, 23, 26, 31, 35]  # horizontal win = [12, 13, 14, 15, 16, 17]
+    size = 6
+    board = Array.new(size*size) { |i| "" }
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    win.get_win(positions)
+    result = win.win
+    assert_equal([12, 13, 14, 15, 16, 17], result)
+  end
 
   # def test_6_get_winning_positions_v1
   #   win = Win.new

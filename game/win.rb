@@ -111,15 +111,13 @@ end
 
 #Sandbox testing
 
-
 # positions = [0, 1, 6, 11, 13, 16, 21, 24]  # win = [1, 6, 11, 16, 21]
 # size = 5
 # board = Array.new(size*size) { |i| "" }
 # win = Win.new(size)
-# p "win.size: #{win.size}"
 # win.update_board(board)
 # win.populate_wins
-# p "win.wins: #{win.wins}"
 # win.get_win(positions)
-# p win.get_win(positions)
+# win.get_win(positions)
+# p win.win
 
