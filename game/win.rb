@@ -67,7 +67,15 @@ class Win
 
   # Method to calculate top-right diagonal winning positions
   def get_d_2_win(size)
-
+    board_indexes = get_board_indexes
+    d_win_2 = []
+    dw2_position = size - 1
+    dw2_offset = size - 1
+    size.times {
+      d_win_2.push(dw2_position)
+      dw2_position += dw2_offset
+    }
+    return d_win_2
   end
 
   # Method to populate @wins array with all winning positions
