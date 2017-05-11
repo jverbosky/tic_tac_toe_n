@@ -126,7 +126,45 @@ class TestBoard < Minitest::Test
     assert_equal(vertical_wins, result)
   end
 
+  def test_13_get_top_left_diagonal_winning_positions_3x3
+    win = Win.new
+    size = 3
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_d_1_wins(size)
+    diagonal_1_wins = [0, 4, 8]
+    assert_equal(diagonal_1_wins, result)
+  end
 
+  def test_14_get_top_left_diagonal_winning_positions_4x4
+    win = Win.new
+    size = 4
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_d_1_wins(size)
+    diagonal_1_wins = [0, 5, 10, 15]
+    assert_equal(diagonal_1_wins, result)
+  end
+
+  def test_15_get_top_left_diagonal_winning_positions_5x5
+    win = Win.new
+    size = 5
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_d_1_wins(size)
+    diagonal_1_wins = [0, 6, 12, 18, 24]
+    assert_equal(diagonal_1_wins, result)
+  end
+
+  def test_16_get_top_left_diagonal_winning_positions_6x6
+    win = Win.new
+    size = 6
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_d_1_wins(size)
+    diagonal_1_wins = [0, 7, 14, 21, 28, 35]
+    assert_equal(diagonal_1_wins, result)
+  end
 
 
   # def test_1_update_board

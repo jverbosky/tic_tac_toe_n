@@ -80,7 +80,7 @@ class Win
     get_win(x)
   end
 
-  # Method to determin if O Won (endgame condition)
+  # Method to determine if O Won (endgame condition)
   def o_won?
     o = @game_board.each_index.select { |position| @game_board[position] == "O" }
     get_win(o)
