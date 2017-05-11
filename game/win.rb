@@ -29,13 +29,11 @@ class Win
 
   # Method to calculate horizontal winning positions
   def get_h_wins(board_indexes)
-    # board_indexes = get_board_indexes
     h_wins = board_indexes.each_slice(@size).to_a
   end
 
   # Method to calculate vertical winning positions
   def get_v_wins(board_indexes)
-    # board_indexes = get_board_indexes
     v_wins = []
     array_counter = 0
     offset_counter = 0
@@ -85,19 +83,13 @@ class Win
 
   # Method to populate @wins with all winning positions based on board size
   def populate_wins
-    # h_wins = get_h_wins
-    # v_wins = get_v_wins
-    # d_wins = get_d_wins
-    # @wins = h_wins + v_wins + d_wins
     b_idx = get_board_indexes
-    p "board indexes: #{b_idx}"
     @wins = get_h_wins(b_idx) + get_v_wins(b_idx) + get_d_wins
   end
 
   # Method to update @win with the winning positions and return true if player won
   def get_win(positions)
     won = false
-    p "get_win wins: #{@wins}"
     @wins.each { |win| (won = true; @win = win) if positions & win == win }
     won
   end
@@ -120,14 +112,14 @@ end
 #Sandbox testing
 
 
-positions = [0, 1, 6, 11, 13, 16, 21, 24]  # win = [1, 6, 11, 16, 21]
-size = 5
-board = Array.new(size*size) { |i| "" }
-win = Win.new(size)
-p "win.size: #{win.size}"
-win.update_board(board)
-win.populate_wins
-p "win.wins: #{win.wins}"
-win.get_win(positions)
-p win.get_win(positions)
+# positions = [0, 1, 6, 11, 13, 16, 21, 24]  # win = [1, 6, 11, 16, 21]
+# size = 5
+# board = Array.new(size*size) { |i| "" }
+# win = Win.new(size)
+# p "win.size: #{win.size}"
+# win.update_board(board)
+# win.populate_wins
+# p "win.wins: #{win.wins}"
+# win.get_win(positions)
+# p win.get_win(positions)
 
