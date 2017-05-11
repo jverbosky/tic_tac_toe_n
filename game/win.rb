@@ -78,6 +78,11 @@ class Win
     return d_win_2
   end
 
+  # Method to compile diagonal winning positions
+  def get_d_wins(size)
+
+  end
+
   # Method to populate @wins array with all winning positions
   def populate_wins
 

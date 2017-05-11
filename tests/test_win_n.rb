@@ -206,6 +206,50 @@ class TestBoard < Minitest::Test
     assert_equal(diagonal_2_win, result)
   end
 
+  def test_21_get_diagonal_winning_positions_3x3
+    win = Win.new
+    size = 3
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_d_wins(size)
+    diagonal_wins = [[0, 4, 8], [2, 4, 6]]
+    assert_equal(diagonal_wins, result)
+  end
+
+  def test_22_get_diagonal_winning_positions_4x4
+    win = Win.new
+    size = 4
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_d_wins(size)
+    diagonal_wins = [[0, 5, 10, 15], [3, 6, 9, 12]]
+    assert_equal(diagonal_wins, result)
+  end
+
+    def test_23_get_diagonal_winning_positions_5x5
+    win = Win.new
+    size = 5
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_d_wins(size)
+    diagonal_wins = [[0, 6, 12, 18, 24], [4, 8, 12, 16, 20]]
+    assert_equal(diagonal_wins, result)
+  end  
+
+  def test_24_get_diagonal_winning_positions_6x6
+    win = Win.new
+    size = 6
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_d_wins(size)
+    diagonal_wins = [[0, 7, 14, 21, 28, 35], [5, 10, 15, 20, 25, 30]]
+    assert_equal(diagonal_wins, result)
+  end
+
+
+
+
+
   # def test_1_update_board
   #   win = Win.new
   #   board = ["", "X", "", "", "O", "", "", "X", ""]
