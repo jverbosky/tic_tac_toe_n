@@ -522,52 +522,172 @@ class TestBoard < Minitest::Test
     assert_equal([12, 13, 14, 15, 16, 17], result)
   end
 
-  # def test_6_get_winning_positions_v1
-  #   win = Win.new
-  #   positions = [0, 1, 4, 8]
-  #   win.get_win(positions)
-  #   result = win.win
-  #   assert_equal([0, 4, 8], result)
-  # end
+  def test_53_verify_X_won_false_3x3
+    size = 3
+    board = ["X", "", "", "", "O", "", "", "", ""]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.x_won?
+    assert_equal(false, result)
+  end
 
-  # def test_7_get_winning_positions_v2
-  #   win = Win.new
-  #   positions = [0, 3, 5, 6, 7]
-  #   win.get_win(positions)
-  #   result = win.win
-  #   assert_equal([0, 3, 6], result)
-  # end
+  def test_54_verify_X_won_false_4x4
+    size = 4
+    board = ["", "X", "", "O", "", "", "", "X", "", "", "O", "", "", "X", "", ""]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.x_won?
+    assert_equal(false, result)
+  end
 
-  # def test_8_verify_X_won_false
-  #   win = Win.new
-  #   board = ["X", "", "", "", "O", "", "", "", ""]
-  #   win.update_board(board)
-  #   result = win.x_won?
-  #   assert_equal(false, result)
-  # end
+  def test_55_verify_X_won_false_5x5
+    size = 5
+    board = ["", "X", "", "", "", "O", "", "", "", "X", "", "", "", "O", "", "", "", "X", "", "", "X", "", "O", "", ""]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.x_won?
+    assert_equal(false, result)
+  end
 
-  # def test_9_verify_X_won_true
-  #   win = Win.new
-  #   board = ["X", "O", "", "", "O", "O", "X", "X", "X"]
-  #   win.update_board(board)
-  #   result = win.x_won?
-  #   assert_equal(true, result)
-  # end
+  def test_56_verify_X_won_false_6x6
+    size = 6
+    board = ["", "X", "", "X", "", "O", "", "", "", "X", "", "", "", "", "O", "", "", "", "", "X", "", "", "", "", "O", "", "", "", "", "X", "", "", "", "", "O", ""]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.x_won?
+    assert_equal(false, result)
+  end
 
-  # def test_10_verify_O_won_false
-  #   win = Win.new
-  #   board = ["X", "", "", "", "O", "", "", "", ""]
-  #   win.update_board(board)
-  #   result = win.o_won?
-  #   assert_equal(false, result)
-  # end
+  def test_57_verify_X_won_true_3x3
+    size = 3
+    board = ["X", "O", "", "", "O", "O", "X", "X", "X"]
+    # note: horizontal win = [6, 7, 8]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.x_won?
+    assert_equal(true, result)
+  end
 
-  # def test_11_verify_O_won_true
-  #   win = Win.new
-  #   board = ["X", "", "", "O", "O", "O", "X", "", "X"]
-  #   win.update_board(board)
-  #   result = win.o_won?
-  #   assert_equal(true, result)
-  # end
+  def test_58_verify_X_won_true_4x4
+    size = 4
+    board = ["X", "X", "O", "O", "X", "O", "", "X", "X", "O", "O", "", "X", "", "", "O"]
+    # note: vertical win = [0, 4, 8, 12]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.x_won?
+    assert_equal(true, result)
+  end
+
+  def test_59_verify_X_won_true_5x5
+    size = 5
+    board = ["X", "X", "O", "O", "", "O", "X", "", "O", "X", "", "", "X", "O", "", "", "", "X", "X", "O", "X", "O", "O", "O", "X"]
+    # note: diagonal 1 win = [0, 6, 12, 18, 24]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.x_won?
+    assert_equal(true, result)
+  end
+
+  def test_60_verify_X_won_true_6x6
+    size = 6
+    board = ["O", "X", "O", "X", "O", "X", "O", "", "", "X", "X", "", "", "", "O", "X", "", "", "", "X", "X", "", "", "", "O", "X", "", "", "O", "X", "X", "", "O", "", "O", "O"]
+    # note: diagonal 2 win = [5, 10, 15, 20, 25, 30]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.x_won?
+    assert_equal(true, result)
+  end
+
+  def test_61_verify_O_won_false_3x3
+    size = 3
+    board = ["X", "", "", "", "O", "", "", "", ""]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.o_won?
+    assert_equal(false, result)
+  end
+
+  def test_62_verify_O_won_false_4x4
+    size = 4
+    board = ["", "X", "", "O", "", "", "", "X", "", "", "O", "", "", "X", "", ""]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.o_won?
+    assert_equal(false, result)
+  end
+
+  def test_63_verify_O_won_false_5x5
+    size = 5
+    board = ["", "X", "", "", "", "O", "", "", "", "X", "", "", "", "O", "", "", "", "X", "", "", "X", "", "O", "", ""]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.o_won?
+    assert_equal(false, result)
+  end
+
+  def test_64_verify_O_won_false_6x6
+    size = 6
+    board = ["", "X", "", "X", "", "O", "", "", "", "X", "", "", "", "", "O", "", "", "", "", "X", "", "", "", "", "O", "", "", "", "", "X", "", "", "", "", "O", ""]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.o_won?
+    assert_equal(false, result)
+  end
+
+  def test_65_verify_O_won_true_3x3
+    size = 3
+    board = ["X", "", "", "O", "O", "O", "X", "", "X"]
+    # note: horizontal win = [3, 4, 5]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.o_won?
+    assert_equal(true, result)
+  end
+
+  def test_66_verify_O_won_true_4x4
+    size = 4
+    board = ["X", "X", "O", "O", "", "O", "O", "X", "", "", "O", "", "X", "X", "O", "X"]
+    # note: vertical win = [2, 6, 10, 14]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.o_won?
+    assert_equal(true, result)
+  end
+
+  def test_67_verify_O_won_true_5x5
+    size = 5
+    board = ["O", "X", "X", "X", "X", "O", "O", "X", "", "X", "", "", "O", "O", "", "", "", "X", "O", "", "X", "", "O", "", "O"]
+    # note: diagonal 1 win = [0, 6, 12, 18, 24]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.o_won?
+    assert_equal(true, result)
+  end
+
+  def test_68_verify_O_won_true_6x6
+    size = 6
+    board = ["X", "X", "", "X", "", "O", "X", "", "", "X", "O", "", "", "", "O", "O", "", "X", "", "X", "O", "", "", "", "O", "O", "", "", "", "X", "O", "", "", "", "O", "X"]
+    # note: diagonal 2 win = [5, 10, 15, 20, 25, 30]
+    win = Win.new(size)
+    win.update_board(board)
+    win.populate_wins
+    result = win.o_won?
+    assert_equal(true, result)
+  end
 
 end
