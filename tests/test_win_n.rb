@@ -9,8 +9,9 @@ class TestBoard < Minitest::Test
   def test_1_get_board_indexes_3x3
     win = Win.new
     size = 3
-    game_board = Array.new(size*size) { |i| "" }
-    result = win.get_board_indexes(game_board)
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_board_indexes
     board_indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     assert_equal(board_indexes, result)
   end
@@ -18,8 +19,9 @@ class TestBoard < Minitest::Test
   def test_2_get_board_indexes_4x4
     win = Win.new
     size = 4
-    game_board = Array.new(size*size) { |i| "" }
-    result = win.get_board_indexes(game_board)
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_board_indexes
     board_indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
     assert_equal(board_indexes, result)
   end
@@ -27,8 +29,9 @@ class TestBoard < Minitest::Test
   def test_3_get_board_indexes_5x5
     win = Win.new
     size = 5
-    game_board = Array.new(size*size) { |i| "" }
-    result = win.get_board_indexes(game_board)
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_board_indexes
     board_indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
     assert_equal(board_indexes, result)
   end
@@ -36,39 +39,52 @@ class TestBoard < Minitest::Test
   def test_4_get_board_indexes_6x6
     win = Win.new
     size = 6
-    game_board = Array.new(size*size) { |i| "" }
-    result = win.get_board_indexes(game_board)
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_board_indexes
     board_indexes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
     assert_equal(board_indexes, result)
   end
 
-  def test_5_get_horizontal_winning_positions_3x3
-    win = Win.new
-    horizontal_wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
-    result = win.get_h_wins(3)
-    assert_equal(horizontal_wins, result)
-  end
+  # def test_5_get_horizontal_winning_positions_3x3
+  #   win = Win.new
+  #   size = 3
+  #   board = Array.new(size*size) { |i| "" }
+  #   win.update_board(board)
+  #   result = win.get_h_wins(size)
+  #   horizontal_wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+  #   assert_equal(horizontal_wins, result)
+  # end
 
-  def test_6_get_horizontal_winning_positions_4x4
-    win = Win.new
-    horizontal_wins = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]]
-    result = win.get_h_wins(4)
-    assert_equal(horizontal_wins, result)
-  end
+  # def test_6_get_horizontal_winning_positions_4x4
+  #   win = Win.new
+  #   size = 4
+  #   board = Array.new(size*size) { |i| "" }
+  #   win.update_board(board)
+  #   result = win.get_h_wins(size)
+  #   horizontal_wins = [[0, 1, 2, 3], [4, 5, 6, 7], [8, 9, 10, 11], [12, 13, 14, 15]]
+  #   assert_equal(horizontal_wins, result)
+  # end
 
-  def test_7_get_horizontal_winning_positions_5x5
-    win = Win.new
-    horizontal_wins = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18, 19], [20, 21, 22, 23, 24]]
-    result = win.get_h_wins(5)
-    assert_equal(horizontal_wins, result)
-  end
+  # def test_7_get_horizontal_winning_positions_5x5
+  #   win = Win.new
+  #   size = 5
+  #   board = Array.new(size*size) { |i| "" }
+  #   win.update_board(board)
+  #   result = win.get_h_wins(size)
+  #   horizontal_wins = [[0, 1, 2, 3, 4], [5, 6, 7, 8, 9], [10, 11, 12, 13, 14], [15, 16, 17, 18, 19], [20, 21, 22, 23, 24]]
+  #   assert_equal(horizontal_wins, result)
+  # end
 
-  def test_8_get_horizontal_winning_positions_6x6
-    win = Win.new
-    horizontal_wins = [[0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11], [12, 13, 14, 15, 16, 17], [18, 19, 20, 21, 22, 23], [24, 25, 26, 27, 28, 29], [30, 31, 32, 33, 34, 35]]
-    result = win.get_h_wins(6)
-    assert_equal(horizontal_wins, result)
-  end
+  # def test_8_get_horizontal_winning_positions_6x6
+  #   win = Win.new
+  #   size = 6
+  #   board = Array.new(size*size) { |i| "" }
+  #   win.update_board(board)
+  #   result = win.get_h_wins(size)
+  #   horizontal_wins = [[0, 1, 2, 3, 4, 5], [6, 7, 8, 9, 10, 11], [12, 13, 14, 15, 16, 17], [18, 19, 20, 21, 22, 23], [24, 25, 26, 27, 28, 29], [30, 31, 32, 33, 34, 35]]
+  #   assert_equal(horizontal_wins, result)
+  # end
 
   # def test_1_update_board
   #   win = Win.new

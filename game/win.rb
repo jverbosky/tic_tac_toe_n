@@ -7,8 +7,8 @@ class Win
 
   def initialize
     @game_board = []  # populated with current game board by game_over? in Game class
-    @wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
-    # @wins = []
+    # @wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+    @wins = []
     @win = []  # populated with winning positions by get_win()
   end
 
@@ -23,13 +23,14 @@ class Win
   end
 
   # Method to convert game_board into an array of indexes
-  def get_board_indexes(game_board)
-    board_indexes = game_board.each_index.select { |position| game_board[position] }
+  def get_board_indexes
+    board_indexes = @game_board.each_index.select { |position| game_board[position] }
   end
 
   # Method to calculate horizontal winning positions
   def get_h_wins(size)
-
+    board_indexes = get_board_indexes
+    h_wins = board_indexes.each_slice(size).to_a
   end
 
   # Method to calculate vertical winning positions
@@ -72,3 +73,12 @@ class Win
   end
 
 end
+
+
+#Sandbox testing
+
+# win = Win.new
+# size = 4
+# board = Array.new(size*size) { |i| "" }
+# win.update_board(board)
+# p win.get_h_wins(size)
