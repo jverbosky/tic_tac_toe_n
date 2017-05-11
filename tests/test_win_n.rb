@@ -131,9 +131,9 @@ class TestBoard < Minitest::Test
     size = 3
     board = Array.new(size*size) { |i| "" }
     win.update_board(board)
-    result = win.get_d_1_wins(size)
-    diagonal_1_wins = [0, 4, 8]
-    assert_equal(diagonal_1_wins, result)
+    result = win.get_d_1_win(size)
+    diagonal_1_win = [0, 4, 8]
+    assert_equal(diagonal_1_win, result)
   end
 
   def test_14_get_top_left_diagonal_winning_positions_4x4
@@ -141,9 +141,9 @@ class TestBoard < Minitest::Test
     size = 4
     board = Array.new(size*size) { |i| "" }
     win.update_board(board)
-    result = win.get_d_1_wins(size)
-    diagonal_1_wins = [0, 5, 10, 15]
-    assert_equal(diagonal_1_wins, result)
+    result = win.get_d_1_win(size)
+    diagonal_1_win = [0, 5, 10, 15]
+    assert_equal(diagonal_1_win, result)
   end
 
   def test_15_get_top_left_diagonal_winning_positions_5x5
@@ -151,9 +151,9 @@ class TestBoard < Minitest::Test
     size = 5
     board = Array.new(size*size) { |i| "" }
     win.update_board(board)
-    result = win.get_d_1_wins(size)
-    diagonal_1_wins = [0, 6, 12, 18, 24]
-    assert_equal(diagonal_1_wins, result)
+    result = win.get_d_1_win(size)
+    diagonal_1_win = [0, 6, 12, 18, 24]
+    assert_equal(diagonal_1_win, result)
   end
 
   def test_16_get_top_left_diagonal_winning_positions_6x6
@@ -161,9 +161,9 @@ class TestBoard < Minitest::Test
     size = 6
     board = Array.new(size*size) { |i| "" }
     win.update_board(board)
-    result = win.get_d_1_wins(size)
-    diagonal_1_wins = [0, 7, 14, 21, 28, 35]
-    assert_equal(diagonal_1_wins, result)
+    result = win.get_d_1_win(size)
+    diagonal_1_win = [0, 7, 14, 21, 28, 35]
+    assert_equal(diagonal_1_win, result)
   end
 
 

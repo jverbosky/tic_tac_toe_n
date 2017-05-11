@@ -53,12 +53,20 @@ class Win
   end  
 
   # Method to calculate top-left diagonal winning positions
-  def get_d_1_wins(size)
-
+  def get_d_1_win(size)
+    board_indexes = get_board_indexes
+    d_win_1 = []
+    dw1_position = 0
+    dw1_offset = size + 1
+    size.times {
+      d_win_1.push(dw1_position)
+      dw1_position += dw1_offset
+    }
+    return d_win_1
   end
 
   # Method to calculate top-right diagonal winning positions
-  def get_d_2_wins(size)
+  def get_d_2_win(size)
 
   end
 
