@@ -5,11 +5,11 @@ class Win
   # attr_reader :wins, :win
   attr_reader :game_board, :wins, :win  # use for unit testing
 
-  def initialize
+  def initialize(size)
+    @size = size  # board size populated by user input from Game class
     @game_board = []  # populated with current game board by game_over? in Game class
-    # @wins = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
-    @wins = []
-    @win = []  # populated with winning positions by get_win()
+    @wins = []  # populated with all winning positions by populate_wins()
+    @win = []  # populated with game-winning positions by get_win()
   end
 
   # Method get the current game board for endgame evaluations
@@ -28,22 +28,22 @@ class Win
   end
 
   # Method to calculate horizontal winning positions
-  def get_h_wins(size)
+  def get_h_wins
     board_indexes = get_board_indexes
-    h_wins = board_indexes.each_slice(size).to_a
+    h_wins = board_indexes.each_slice(@size).to_a
   end
 
   # Method to calculate vertical winning positions
-  def get_v_wins(size)
+  def get_v_wins
     board_indexes = get_board_indexes
     v_wins = []
     array_counter = 0
     offset_counter = 0
-    size.times {
+    @size.times {
       single_v_win = []
-      size.times {
+      @size.times {
         single_v_win.push(board_indexes[offset_counter])
-        offset_counter += size
+        offset_counter += @size
       }
       v_wins.push(single_v_win)
       offset_counter -= board_indexes.count - 1
@@ -53,12 +53,12 @@ class Win
   end  
 
   # Method to calculate top-left diagonal winning positions
-  def get_d_1_win(size)
+  def get_d_1_win
     board_indexes = get_board_indexes
     d_win_1 = []
     dw1_position = 0
-    dw1_offset = size + 1
-    size.times {
+    dw1_offset = @size + 1
+    @size.times {
       d_win_1.push(dw1_position)
       dw1_position += dw1_offset
     }
@@ -66,12 +66,12 @@ class Win
   end
 
   # Method to calculate top-right diagonal winning positions
-  def get_d_2_win(size)
+  def get_d_2_win
     board_indexes = get_board_indexes
     d_win_2 = []
-    dw2_position = size - 1
-    dw2_offset = size - 1
-    size.times {
+    dw2_position = @size - 1
+    dw2_offset = @size - 1
+    @size.times {
       d_win_2.push(dw2_position)
       dw2_position += dw2_offset
     }
@@ -79,15 +79,19 @@ class Win
   end
 
   # Method to compile diagonal winning positions
-  def get_d_wins(size)
+  def get_d_wins
     d_wins = []
-    d_wins.push(get_d_1_win(size), get_d_2_win(size))
+    d_wins.push(get_d_1_win, get_d_2_win)
     d_wins
   end
 
-  # Method to populate @wins array with all winning positions
-  def populate_wins(size)
-
+  # Method to populate @wins with all winning positions based on board size
+  def populate_wins
+    # h_wins = get_h_wins
+    # v_wins = get_v_wins
+    # d_wins = get_d_wins
+    # @wins = h_wins + v_wins + d_wins
+    @wins = get_h_wins + get_v_wins + get_d_wins
   end
 
   # Method to update @win with the winning positions and return true if player won
@@ -114,8 +118,8 @@ end
 
 #Sandbox testing
 
-# win = Win.new
 # size = 3
+# win = Win.new(size)
 # board = Array.new(size*size) { |i| "" }
 # win.update_board(board)
-# p win.get_d_wins(size)
+# p win.populate_wins
