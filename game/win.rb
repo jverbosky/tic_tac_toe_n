@@ -22,6 +22,11 @@ class Win
     @game_board.count("") == 0
   end
 
+  # Method to convert game_board into an array of indexes
+  def get_board_indexes(game_board)
+
+  end
+
   # Method to calculate horizontal winning positions
   def get_h_wins(size)
 
