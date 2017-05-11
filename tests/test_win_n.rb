@@ -86,6 +86,49 @@ class TestBoard < Minitest::Test
     assert_equal(horizontal_wins, result)
   end
 
+  def test_9_get_vertical_winning_positions_3x3
+    win = Win.new
+    size = 3
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_v_wins(size)
+    vertical_wins = [[0, 3, 6], [1, 4, 7], [2, 5, 8]]
+    assert_equal(vertical_wins, result)
+  end
+
+  def test_10_get_vertical_winning_positions_4x4
+    win = Win.new
+    size = 4
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_v_wins(size)
+    vertical_wins = [[0, 4, 8, 12], [1, 5, 9, 13], [2, 6, 10, 14], [3, 7, 11, 15]]
+    assert_equal(vertical_wins, result)
+  end
+
+  def test_11_get_vertical_winning_positions_5x5
+    win = Win.new
+    size = 5
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_v_wins(size)
+    vertical_wins = [[0, 5, 10, 15, 20], [1, 6, 11, 16, 21], [2, 7, 12, 17, 22], [3, 8, 13, 18, 23], [4, 9, 14, 19, 24]]
+    assert_equal(vertical_wins, result)
+  end
+
+  def test_12_get_vertical_winning_positions_6x6
+    win = Win.new
+    size = 6
+    board = Array.new(size*size) { |i| "" }
+    win.update_board(board)
+    result = win.get_v_wins(size)
+    vertical_wins = [[0, 6, 12, 18, 24, 30], [1, 7, 13, 19, 25, 31], [2, 8, 14, 20, 26, 32], [3, 9, 15, 21, 27, 33], [4, 10, 16, 22, 28, 34], [5, 11, 17, 23, 29, 35]]
+    assert_equal(vertical_wins, result)
+  end
+
+
+
+
   # def test_1_update_board
   #   win = Win.new
   #   board = ["", "X", "", "", "O", "", "", "X", ""]
