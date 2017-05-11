@@ -86,7 +86,7 @@ class Win
   end
 
   # Method to populate @wins array with all winning positions
-  def populate_wins
+  def populate_wins(size)
 
   end
 
