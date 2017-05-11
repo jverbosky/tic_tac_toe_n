@@ -24,7 +24,7 @@ class Win
 
   # Method to convert game_board into an array of indexes
   def get_board_indexes(game_board)
-
+    board_indexes = game_board.each_index.select { |position| game_board[position] }
   end
 
   # Method to calculate horizontal winning positions
