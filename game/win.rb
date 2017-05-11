@@ -49,7 +49,7 @@ class Win
       offset_counter -= board_indexes.count - 1
       array_counter += 1
     }
-    return v_wins
+    v_wins
   end  
 
   # Method to calculate top-left diagonal winning positions
@@ -62,7 +62,7 @@ class Win
       d_win_1.push(dw1_position)
       dw1_position += dw1_offset
     }
-    return d_win_1
+    d_win_1
   end
 
   # Method to calculate top-right diagonal winning positions
@@ -75,12 +75,14 @@ class Win
       d_win_2.push(dw2_position)
       dw2_position += dw2_offset
     }
-    return d_win_2
+    d_win_2
   end
 
   # Method to compile diagonal winning positions
   def get_d_wins(size)
-
+    d_wins = []
+    d_wins.push(get_d_1_win(size), get_d_2_win(size))
+    d_wins
   end
 
   # Method to populate @wins array with all winning positions
@@ -113,7 +115,7 @@ end
 #Sandbox testing
 
 # win = Win.new
-# size = 6
+# size = 3
 # board = Array.new(size*size) { |i| "" }
 # win.update_board(board)
-# p win.get_v_wins(size)
+# p win.get_d_wins(size)
