@@ -35,7 +35,21 @@ class Win
 
   # Method to calculate vertical winning positions
   def get_v_wins(size)
-
+    board_indexes = get_board_indexes
+    v_wins = []
+    array_counter = 0
+    offset_counter = 0
+    size.times {
+      single_v_win = []
+      size.times {
+        single_v_win.push(board_indexes[offset_counter])
+        offset_counter += size
+      }
+      v_wins.push(single_v_win)
+      offset_counter -= board_indexes.count - 1
+      array_counter += 1
+    }
+    return v_wins
   end  
 
   # Method to calculate top-left diagonal winning positions
@@ -78,7 +92,7 @@ end
 #Sandbox testing
 
 # win = Win.new
-# size = 4
+# size = 6
 # board = Array.new(size*size) { |i| "" }
 # win.update_board(board)
-# p win.get_h_wins(size)
+# p win.get_v_wins(size)
