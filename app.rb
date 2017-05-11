@@ -25,11 +25,17 @@ class TicTacToeApp < Sinatra::Base
   #   STDERR.reopen(log)
   # end
 
-  # route to load the player selection screen
   get '/' do
-    session[:game] = Game.new  # create a new game instance
-    session[:messaging] = session[:game].messaging  # access messaging instance via game instance
     session[:intro] = [["", "", "X"], ["O", "O", "X"], ["X", "", ""]]  # board for intro screens
+    erb :get_size, locals: {rows: session[:intro]}
+  end
+
+  # route to load the player selection screen
+  post '/game_setup' do
+    size = params[:size].to_i
+    session[:game] = Game.new(size)  # create a new game instance
+    session[:messaging] = session[:game].messaging  # access messaging instance via game instance
+    # session[:intro] = [["", "", "X"], ["O", "O", "X"], ["X", "", ""]]  # board for intro screens
     erb :start, locals: {rows: session[:intro]}
   end
 

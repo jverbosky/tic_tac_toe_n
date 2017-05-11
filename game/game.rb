@@ -17,11 +17,14 @@ class Game
   attr_accessor :move, :round, :board, :p1_type, :p2_type, :player, :pt_current, :m_current, :pt_next, :m_next, :board_index  # use for unit testing
   attr_reader :pt_next, :messaging, :win  # use for unit testing
 
-  def initialize
-    @board = Board.new  # Board class instance
+  def initialize(size)
+    @size = size
+    @board = Board.new(size)  # Board class instance
     @messaging = Messaging.new  # Messaging class instance, accessible to app.rb
     @position = Position.new  # Position class instance
-    @win = Win.new  # Win class instance
+    @win = Win.new(size)  # Win class instance
+    @win.game_board = @board.game_board  # populate Win board for calculating wins
+    @win.populate_wins  # populate wins array in Win class
     @round = 1  # current game round
     @p1 = ""  # Player object instance for X
     @p1_type = ""  # X player type ("Human", "Perfect", "Random", "Sequential")

@@ -1,9 +1,11 @@
 # class to handle win and endgame items
 class Win
 
+  # @game_board is initially populated by Game class for populating @wins
+  attr_accessor :game_board
   # @wins and @win need to be available to the Game class
   # attr_reader :wins, :win
-  attr_reader :game_board, :wins, :win, :size  # use for unit testing
+  attr_reader :wins, :win, :size  # use for unit testing
 
   def initialize(size)
     @size = size  # board size populated by user input from Game class
