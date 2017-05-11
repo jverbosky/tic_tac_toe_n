@@ -386,12 +386,43 @@ class TestBoard < Minitest::Test
     assert_equal(all_wins, result)
   end
 
-  # def test_41_verify_game_won_true
-  #   win = Win.new
-  #   positions = [0, 1, 4, 8]
+  # def test_41_verify_game_won_true_3x3
+  #   positions = [0, 1, 4, 8]  # diagonal 1 win = [0, 4, 8]
+  #   size = 3
+  #   win = Win.new(size)
+  #   win.populate_wins
   #   result = win.get_win(positions)
   #   assert_equal(true, result)
   # end
+
+  # def test_42_verify_game_won_true_4x4
+  #   positions = [0, 1, 3, 6, 9, 12]  # diagonal 2 win = [3, 6, 9, 12]
+  #   size = 4
+  #   win = Win.new(size)
+  #   win.populate_wins
+  #   result = win.get_win(positions)
+  #   assert_equal(true, result)
+  # end
+
+  # def test_43_verify_game_won_true_5x5
+  #   positions = [0, 1, 6, 11, 13, 16, 21, 24]  # vertical win = [1, 6, 11, 16, 21]
+  #   size = 5
+  #   win = Win.new(size)
+  #   win.populate_wins
+  #   result = win.get_win(positions)
+  #   assert_equal(true, result)
+  # end
+
+  # def test_44_verify_game_won_true_6x6
+  #   positions = [0, 9, 12, 13, 14, 15, 16, 17, 23, 26, 31, 35]  # horizontal win = [12, 13, 14, 15, 16, 17]
+  #   size = 6
+  #   win = Win.new(size)
+  #   win.populate_wins
+  #   result = win.get_win(positions)
+  #   assert_equal(true, result)
+  # end
+
+
 
   # def test_5_verify_game_won_false
   #   win = Win.new

@@ -3,7 +3,7 @@ class Win
 
   # @wins and @win need to be available to the Game class
   # attr_reader :wins, :win
-  attr_reader :game_board, :wins, :win  # use for unit testing
+  attr_reader :game_board, :wins, :win, :size  # use for unit testing
 
   def initialize(size)
     @size = size  # board size populated by user input from Game class
@@ -28,14 +28,14 @@ class Win
   end
 
   # Method to calculate horizontal winning positions
-  def get_h_wins
-    board_indexes = get_board_indexes
+  def get_h_wins(board_indexes)
+    # board_indexes = get_board_indexes
     h_wins = board_indexes.each_slice(@size).to_a
   end
 
   # Method to calculate vertical winning positions
-  def get_v_wins
-    board_indexes = get_board_indexes
+  def get_v_wins(board_indexes)
+    # board_indexes = get_board_indexes
     v_wins = []
     array_counter = 0
     offset_counter = 0
@@ -54,7 +54,6 @@ class Win
 
   # Method to calculate top-left diagonal winning positions
   def get_d_1_win
-    board_indexes = get_board_indexes
     d_win_1 = []
     dw1_position = 0
     dw1_offset = @size + 1
@@ -67,7 +66,6 @@ class Win
 
   # Method to calculate top-right diagonal winning positions
   def get_d_2_win
-    board_indexes = get_board_indexes
     d_win_2 = []
     dw2_position = @size - 1
     dw2_offset = @size - 1
@@ -91,12 +89,15 @@ class Win
     # v_wins = get_v_wins
     # d_wins = get_d_wins
     # @wins = h_wins + v_wins + d_wins
-    @wins = get_h_wins + get_v_wins + get_d_wins
+    b_idx = get_board_indexes
+    p "board indexes: #{b_idx}"
+    @wins = get_h_wins(b_idx) + get_v_wins(b_idx) + get_d_wins
   end
 
   # Method to update @win with the winning positions and return true if player won
   def get_win(positions)
     won = false
+    p "get_win wins: #{@wins}"
     @wins.each { |win| (won = true; @win = win) if positions & win == win }
     won
   end
@@ -118,8 +119,15 @@ end
 
 #Sandbox testing
 
-# size = 3
-# win = Win.new(size)
-# board = Array.new(size*size) { |i| "" }
-# win.update_board(board)
-# p win.populate_wins
+
+positions = [0, 1, 6, 11, 13, 16, 21, 24]  # win = [1, 6, 11, 16, 21]
+size = 5
+board = Array.new(size*size) { |i| "" }
+win = Win.new(size)
+p "win.size: #{win.size}"
+win.update_board(board)
+win.populate_wins
+p "win.wins: #{win.wins}"
+win.get_win(positions)
+p win.get_win(positions)
+
