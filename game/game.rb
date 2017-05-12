@@ -84,24 +84,25 @@ class Game
     set_players  # update @player_, @player_type_ and @mark_ variables for current round
     @pt_current == "Human" ? human_move(move) : ai_move  # move() call based on player type
     # @board_index = @position.get_index(@move)  # convert human friendly move to board index value
-    @board_index = @move  # convert human friendly move to board index value
+    @board_index = @move.to_i  # convert human friendly move to board index value
     @round += 1 if valid_move?  # if the move is valid, increment the @round counter
   end
 
   # Method to assign move to @move instance variable for ease-of-access
   def human_move(move)
-    @move = move.to_i
+    # @move = move.to_i
+    @move = move
   end
 
   # Method to collect move from AI player instance
   def ai_move
-    if @pt_current == "Perfect" # if AI player is perfect, pass the necessary info
-      @move = @player.get_move(@win.wins, @board.get_x, @board.get_o, @round, @m_current)
-    elsif @pt_current == "Unbeatable"  # if AI player is unbeatable, no need to pass round
-      @move = @player.get_move(@win.wins, @board.get_x, @board.get_o, @m_current)
-    else  # otherwise just pass the current board to the random or sequential AI player
+    # if @pt_current == "Perfect" # if AI player is perfect, pass the necessary info
+    #   @move = @player.get_move(@win.wins, @board.get_x, @board.get_o, @round, @m_current)
+    # elsif @pt_current == "Unbeatable"  # if AI player is unbeatable, no need to pass round
+    #   @move = @player.get_move(@win.wins, @board.get_x, @board.get_o, @m_current)
+    # else  # otherwise just pass the current board to the random or sequential AI player
       @move = @player.get_move(@board.game_board)
-    end
+    # end
   end
 
   # Method that updates the board and messaging accordingly, called by make_move

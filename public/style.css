@@ -45,9 +45,9 @@ th {
   margin-right: auto;
 }
 
-.padding {
+/*.padding {
   padding: 15px;
-}
+}*/
 
 .score {
   font-size: 20px;
@@ -65,7 +65,7 @@ th {
 }
 
 .board-td {
-  font-size: 36px;
+  font-size: 18px;
   border: 3px solid black;
 }
 
@@ -73,9 +73,9 @@ th {
   border: 1px solid black;
 }
 
-.wide {
+/*.wide {
   width: 100px;
-}
+}*/
 
 /*.red {
   background-color: red;

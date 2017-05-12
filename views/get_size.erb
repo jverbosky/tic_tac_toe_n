@@ -1,18 +1,18 @@
 <!-- /views/get_size.erb -->
 
 <p>Please select the board size:</p>
-<form method="post" action="game_setup">  <!-- action ~ "post '/game_setup' do" in app.rb -->
-  <select type="text" name="size">  <!-- text == string, name ~ "size = params[:size]" in app.rb -->
-    <option value=3>3</option>
-    <option value=4>4</option>
-    <option value=5>5</option>
-    <option value=6>6</option>
-    <option value=7>7</option>
-    <option value=8>8</option>
-    <option value=9>9</option>
-    <option value=10>10</option>
-    <option value=11>11</option>
-    <option value=12>12</option>
+<form method="post" action="start_game">
+  <select type="text" name="size">
+    <option value=3>3 x 3</option>
+    <option value=4>4 x 4</option>
+    <option value=5>5 x 5</option>
+    <option value=6>6 x 6</option>
+    <option value=7>7 x 7</option>
+    <option value=8>8 x 8</option>
+    <option value=9>9 x 9</option>
+    <option value=10>10 x 10</option>
+    <option value=11>11 x 11</option>
+    <option value=12>12 x 12</option>
   </select>
-  <input type="submit" value="Submit">  <!-- button to submit size to "post '/game_setup' do" route -->
+  <input type="submit" value="Submit">
 </form>

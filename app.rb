@@ -25,46 +25,27 @@ class TicTacToeApp < Sinatra::Base
   #   STDERR.reopen(log)
   # end
 
+  # route to prompt player for game board size
   get '/' do
-    session[:intro] = [["", "", "X"], ["O", "O", "X"], ["X", "", ""]]  # board for intro screens
-    erb :get_size, locals: {rows: session[:intro]}
+    session[:intro] = [["", "", ""], ["", "", ""], ["", "", ""]]  # board for intro screens
+    erb :get_size, layout: :intro_layout, locals: {rows: session[:intro]}
   end
 
-  # route to load the player selection screen
-  post '/game_setup' do
+  # route to handle game setup and start the game
+  post '/start_game' do
     size = params[:size].to_i
     session[:game] = Game.new(size)  # create a new game instance
-    session[:messaging] = session[:game].messaging  # access messaging instance via game instance
-    # session[:intro] = [["", "", "X"], ["O", "O", "X"], ["X", "", ""]]  # board for intro screens
-    erb :start, locals: {rows: session[:intro]}
-  end
-
-  # route to display the selected players and begin the game
-  post '/players' do
-    # collect player_type hash from form in start.erb, ex hash: {"p1_type"=>"Random", "p2_type"=>"Perfect"}
-    player_type = params[:player_type]
+    player_type = {"p1_type"=>"Human", "p2_type"=>"Human"}  # hard-code player type for now
     session[:game].select_players(player_type)  # initialize player objects based on player_type hash
     session[:p1_type] = session[:game].p1_type  # assign p1_type session to @p1_type in game.rb
     session[:p2_type] = session[:game].p2_type  # assign p1_type session to @p2_type in game.rb
-    route = (session[:p1_type] == "Human") ? "/play_human" : "/play_ai"  # route based on player one type
-    erb :player_type, locals: {route: route, rows: session[:intro], p1_type: session[:p1_type], p2_type: session[:p2_type]}
-  end
-
-  # route to display game board, round and AI player move details
-  get '/play_ai' do
     round = session[:game].round  # collect current round for messaging
-    move = session[:game].make_move("")  # collect AI player move via make_move() > ai_move
     rows = session[:game].output_board  # grab the current board to display via layout.erb
-    feedback = session[:messaging].feedback  # collect the resulting move messaging
-    prompt = session[:messaging].prompt  # collect the updated player advance messaging
-    if session[:game].game_over?  # if game is over
-      winner = session[:game].end_game  # evaluate endgame items and collect winner for endgame messaging
-      endgame_result = session[:messaging].display_results(session[:p1_type], session[:p2_type], winner)
-      erb :game_over, locals: {rows: rows, round: round, result: endgame_result}  # display final results
-    else  # otherwise display move results
-      route = (session[:game].pt_next == "Human") ? "/play_human" : "/play_ai"  # route based on next player type
-      erb :play_ai, locals: {rows: rows, round: round, feedback: feedback, prompt: prompt, route: route}
-    end
+    session[:game].set_players  # update player info
+    session[:messaging] = session[:game].messaging  # access messaging instance via game instance
+    mark = session[:game].m_current  # collect current mark for messaging
+    feedback = session[:messaging].human_messaging(round, mark)  # update intro human player messaging
+    erb :start, locals: {rows: rows, round: round, feedback: feedback}
   end
 
   # route to allow input of human player move
@@ -78,13 +59,13 @@ class TicTacToeApp < Sinatra::Base
   end
 
   # route to display game board, round and human player move details
-  post '/result_human' do
-    move = params[:location]
-    round = session[:game].round  # collect current round for messaging
+  post '/play_human' do
     move = params[:location]  # collect the specified move from play_human form
     session[:game].make_move(move)  # evaluate move for route selection
     feedback = session[:messaging].feedback  # collect the resulting move messaging
-    prompt = session[:messaging].prompt  # collect the updated player advance messaging
+    session[:game].set_players  # update player info
+    mark = session[:game].m_current  # collect current mark for messaging
+    round = session[:game].round  # collect current round for messaging
     rows = session[:game].output_board  # grab the current board to display via layout.erb
     if session[:game].game_over?  # if game is over
       winner = session[:game].end_game  # evaluate endgame items and collect winner for endgame messaging
@@ -93,21 +74,21 @@ class TicTacToeApp < Sinatra::Base
     elsif feedback =~ /^That/  # if feedback ~ taken position, reprompt via play_human
       erb :play_human, locals: {rows: rows, round: round, feedback: feedback}
     else  # otherwise display move results
-      route = (session[:game].pt_next == "Human") ? "/play_human" : "/play_ai"  # route based on next player type
-      erb :result_human, locals: {rows: rows, round: round, feedback: feedback, prompt: prompt, route: route}
+      feedback = session[:messaging].human_messaging(round, mark)  # update human player messaging
+      erb :result_human, locals: {rows: rows, round: round, feedback: feedback}
     end
   end
 
-  # route for front-end testing to use game_over views in /play_ai and /result_human
-  get '/game_over_test' do
-    session[:game].round = 5  # use for front-end testing
-    session[:game].board.game_board = ["X", "X", "", "", "O", "", "O", "", ""]
-  end
+  # # route for front-end testing to use game_over views in /play_ai and /result_human
+  # get '/game_over_test' do
+  #   session[:game].round = 5  # use for front-end testing
+  #   session[:game].board.game_board = ["X", "X", "", "", "O", "", "O", "", ""]
+  # end
 
-  # route for front-end testing to use game_over views in /play_ai and /result_human
-  get '/location_taken_test' do
-    session[:game].round = 3  # use for front-end testing
-    session[:game].board.game_board = ["X", "", "", "", "O", "", "", "", ""]
-  end
+  # # route for front-end testing to use game_over views in /play_ai and /result_human
+  # get '/location_taken_test' do
+  #   session[:game].round = 3  # use for front-end testing
+  #   session[:game].board.game_board = ["X", "", "", "", "O", "", "", "", ""]
+  # end
 
 end

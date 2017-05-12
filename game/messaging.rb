@@ -34,9 +34,11 @@ class Messaging
   # Method to display endgame messaging
   def display_results(p1_type, p2_type, winner)
     if winner == "X"
-      return "#{p1_type} X won the game!<br>The winning positions were: #{win}"  # advise on win
+      # return "#{p1_type} X won the game!<br>The winning positions were: #{win}"  # advise on win
+      return "#{p1_type} X won the game!"  # advise on win (revised for NxN board)
     elsif winner == "O"
-      return "#{p2_type} O won the game!<br>The winning positions were: #{win}"  # advise on win
+      # return "#{p2_type} O won the game!<br>The winning positions were: #{win}"  # advise on win
+      return "#{p2_type} O won the game!"  # advise on win (revised for NxN board)
     elsif winner == "tie"  # if no one won
       return "It was a tie!"  # advise on tie
     end

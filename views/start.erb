@@ -1,9 +1,16 @@
 <!-- /views/start.erb -->
 
-<p>Please select the player types:</p>
-<form method="post" action="players">  <!-- action ~ "post '/guess' do" in app.rb -->
+<div>
+  <h3>Round <%= round %></h3>
+  <p><%= feedback %></p>
+  <p>Please select a location.</p>
+</div>
+
+
+<!-- <p>Please select the player types:</p>
+<form method="post" action="players">  
   <p>Player 1 (X):
-    <select type="text" name="player_type[p1_type]">  <!-- text == string, name ~ "@num = params[:player_type]" in app.rb -->
+    <select type="text" name="player_type[p1_type]">
       <option value="Human">Human</option>
       <option value="Perfect">Perfect</option>
       <option value="Random">Random</option>
@@ -12,7 +19,7 @@
     </select>
   </p>
   <p>Player 2 (O):
-    <select type="text" name="player_type[p2_type]">  <!-- text == string, name ~ "@num = params[:player_type]" in app.rb -->
+    <select type="text" name="player_type[p2_type]">
       <option value="Human">Human</option>
       <option value="Perfect">Perfect</option>
       <option value="Random">Random</option>
@@ -20,5 +27,5 @@
       <option value="Unbeatable">Unbeatable</option>
     </select>
   </p>
-  <input type="submit" value="Submit">  <!-- button to submit letter to "post '/players' do" route -->
-</form>
+  <input type="submit" value="Submit">
+</form> -->
