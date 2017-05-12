@@ -79,6 +79,7 @@ class TicTacToeApp < Sinatra::Base
 
   # route to display game board, round and human player move details
   post '/result_human' do
+    move = params[:location]
     round = session[:game].round  # collect current round for messaging
     move = params[:location]  # collect the specified move from play_human form
     session[:game].make_move(move)  # evaluate move for route selection

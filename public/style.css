@@ -11,7 +11,6 @@ body {
 div {
   display: table;
   margin: 0 auto;
-  /*max-width: 470px;*/
 }
 
 a {
@@ -66,11 +65,8 @@ th {
 }
 
 .board-td {
+  font-size: 36px;
   border: 3px solid black;
-}
-
-.board-space {
-  font-size: 75px;
 }
 
 .legend {
@@ -81,7 +77,7 @@ th {
   width: 100px;
 }
 
-.red {
+/*.red {
   background-color: red;
 }
 
@@ -91,7 +87,7 @@ th {
 
 .yellow {
   background-color: yellow;
-}
+}*/
 
 /* Use these two classes to position copyright bottom/middle of the page*/
 /* Note - doesn't work well on mobile, research more later */

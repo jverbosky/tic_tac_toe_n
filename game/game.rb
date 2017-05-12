@@ -83,13 +83,14 @@ class Game
   def make_move(move)
     set_players  # update @player_, @player_type_ and @mark_ variables for current round
     @pt_current == "Human" ? human_move(move) : ai_move  # move() call based on player type
-    @board_index = @position.get_index(@move)  # convert human friendly move to board index value
+    # @board_index = @position.get_index(@move)  # convert human friendly move to board index value
+    @board_index = @move  # convert human friendly move to board index value
     @round += 1 if valid_move?  # if the move is valid, increment the @round counter
   end
 
   # Method to assign move to @move instance variable for ease-of-access
   def human_move(move)
-    @move = move
+    @move = move.to_i
   end
 
   # Method to collect move from AI player instance

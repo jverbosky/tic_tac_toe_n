@@ -12,6 +12,14 @@
     <!-- <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'> -->
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="/images/favicon.ico?" type="image/x-icon">
+
+<!--     <script type="text/javascript" src="textFit.js"></script>
+    <script type="text/javascript" src="javascript.js"></script> -->
+
+    <!--  <script type="text/javascript" src="javascript.js"></script> -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.1/jquery.fittext.min.js'></script>
+    <script type="text/javascript" src="jquery.js"></script> -->
   </head>
   <body>
   <header class="red">
@@ -33,11 +41,11 @@
     <!-- game board -->
     <div class = "red">
       <div class="center-block">
-        <table class="board-table">
+        <table id="table_id" class="board-table">
           <% rows.each do |row| %>
           <tr>
             <% row.each do |space| %>
-            <td class="board-td"><div class="board-space yellow"><%= space %></div></td>
+            <td class="board-td"><div class="board-space fit-text yellow"><%= space %></div></td>
             <% end %>
           </tr>
           <% end %>
@@ -50,5 +58,11 @@
     </div>
 
   </section>
+
+<!--   <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script> -->
+<!--   <script src='http://cdnjs.cloudflare.com/ajax/libs/FitText.js/1.1/jquery.fittext.min.js'></script> -->
+<!--   <script type="text/javascript" src="jquery.js"></script> -->
+    <script type="text/javascript" src="javascript.js"></script>
+
   </body>
 </html>
