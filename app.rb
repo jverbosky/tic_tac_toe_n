@@ -5,7 +5,7 @@
 require 'sinatra'
 require_relative './game/game.rb'
 
-class TicTacToeApp < Sinatra::Base
+class TicTacToeNApp < Sinatra::Base
 
   enable :sessions  # allow variable value to persist through routes (don't use when need to update value)
   # enable :logging, :dump_errors, :raise_errors

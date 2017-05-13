@@ -1,2 +1,2 @@
 require './app'
-run TicTacToeApp
+run TicTacToeNApp
