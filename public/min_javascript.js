@@ -14,12 +14,10 @@ for (var i = 0; i < cells.length; i++) {
     // console.log("Position: " + i + " and value: " + cell.innerHTML)
 
     // conditional to replace HTML text with image if X or O
-    if (cell.innerHTML == "X") {
+    if (cell.innerHTML == '<img src="/images/empty.png" alt="X">') {
         cell.innerHTML = '<img src="/images/x.png">';
-    } else if (cell.innerHTML == "O") {
+    } else if (cell.innerHTML == '<img src="/images/empty.png" alt="O">') {
         cell.innerHTML = '<img src="/images/o.png">';
-    } else {
-        cell.innerHTML = '<img src="/images/empty.png">';
     }
 
 }
