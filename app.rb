@@ -28,7 +28,7 @@ class TicTacToeApp < Sinatra::Base
   # route to prompt player for game board size
   get '/' do
     session[:intro] = [["", "", ""], ["", "", ""], ["", "", ""]]  # board for intro screens
-    erb :get_size, layout: :intro_layout, locals: {rows: session[:intro]}
+    erb :get_size, layout: :min_js_layout, locals: {rows: session[:intro]}
   end
 
   # route to handle game setup and start the game
@@ -70,7 +70,7 @@ class TicTacToeApp < Sinatra::Base
     if session[:game].game_over?  # if game is over
       winner = session[:game].end_game  # evaluate endgame items and collect winner for endgame messaging
       endgame_result = session[:messaging].display_results(session[:p1_type], session[:p2_type], winner)
-      erb :game_over, locals: {rows: rows, round: round, result: endgame_result}  # display final results
+      erb :game_over, layout: :min_js_layout, locals: {rows: rows, round: round, result: endgame_result}  # display final results
     elsif feedback =~ /^That/  # if feedback ~ taken position, reprompt via play_human
       erb :play_human, locals: {rows: rows, round: round, feedback: feedback}
     else  # otherwise display move results

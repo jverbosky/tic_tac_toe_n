@@ -33,6 +33,12 @@ th {
   font-size: 18px;
 }
 
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
 .title {
   font-size: 32px;
   font-weight: bold;

@@ -33,11 +33,11 @@
     <!-- game board -->
     <div class = "red">
       <div class="center-block">
-        <table class="board-table">
+        <table id="table_id" class="board-table">
           <% rows.each do |row| %>
           <tr>
             <% row.each do |space| %>
-            <td class="board-td"><div class="board-space fit-text yellow"><%= space %></div></td>
+            <td class="board-td"><%= space %></td>
             <% end %>
           </tr>
           <% end %>
@@ -50,6 +50,8 @@
     </div>
 
   </section>
+
+  <script type="text/javascript" src="min_javascript.js"></script>
 
   </body>
 </html>
