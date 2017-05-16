@@ -1,6 +1,9 @@
+# note that AI-specific tests are commented out
+# for human-versus-human NxN game
+
 # be sure to use the unit test versions of attr_ in board.rb and game.rb
-# - attr_accessor in board.rb
-# - attr_reader in game.rb
+# - attr_accessor in /board/board.rb
+# - attr_reader in /game/game.rb
 
 require "minitest/autorun"
 require_relative "../game/game.rb"
@@ -21,20 +24,36 @@ class TestPosition < Minitest::Test
     assert_equal([["X", "", ""], ["", "O", ""], ["", "O", "X"]], result)
   end
 
-  def test_3_verify_player_1_type_updating_correctly
+  # def test_3_verify_player_1_type_updating_correctly
+  #   game = Game.new(3)
+  #   player_type = {"p1_type"=>"Random", "p2_type"=>"Perfect"}
+  #   game.select_players(player_type)
+  #   result = game.p1_type
+  #   assert_equal("Random", result)
+  # end
+
+  def test_3n_verify_player_1_type_updating_correctly
     game = Game.new(3)
-    player_type = {"p1_type"=>"Random", "p2_type"=>"Perfect"}
+    player_type = {"p1_type"=>"Human", "p2_type"=>"Human"}
     game.select_players(player_type)
     result = game.p1_type
-    assert_equal("Random", result)
+    assert_equal("Human", result)
   end
 
-  def test_4_verify_player_2_type_updating_correctly
+  # def test_4_verify_player_2_type_updating_correctly
+  #   game = Game.new(3)
+  #   player_type = {"p1_type"=>"Random", "p2_type"=>"Perfect"}
+  #   game.select_players(player_type)
+  #   result = game.p2_type
+  #   assert_equal("Perfect", result)
+  # end
+
+  def test_4n_verify_player_2_type_updating_correctly
     game = Game.new(3)
-    player_type = {"p1_type"=>"Random", "p2_type"=>"Perfect"}
+    player_type = {"p1_type"=>"Human", "p2_type"=>"Human"}
     game.select_players(player_type)
     result = game.p2_type
-    assert_equal("Perfect", result)
+    assert_equal("Human", result)
   end
 
   def test_5_verify_current_player_type_updating_correctly_round_1
@@ -140,19 +159,19 @@ class TestPosition < Minitest::Test
     assert_equal(3, result)
   end
 
-  def test_15_verify_round_incremented_if_valid_AI_move
-    game = Game.new(3)
-    player_type = {"p1_type"=>"Human", "p2_type"=>"Sequential"}
-    move = ""
-    game.board.game_board = ["X", "", "", "", "", "", "", "", ""]
-    game.round = 2
-    game.select_players(player_type)
-    game.p1_type = "Human"
-    game.p2_type = "Sequential"
-    game.make_move(move)
-    result = game.round
-    assert_equal(3, result)
-  end
+  # def test_15_verify_round_incremented_if_valid_AI_move
+  #   game = Game.new(3)
+  #   player_type = {"p1_type"=>"Human", "p2_type"=>"Sequential"}
+  #   move = ""
+  #   game.board.game_board = ["X", "", "", "", "", "", "", "", ""]
+  #   game.round = 2
+  #   game.select_players(player_type)
+  #   game.p1_type = "Human"
+  #   game.p2_type = "Sequential"
+  #   game.make_move(move)
+  #   result = game.round
+  #   assert_equal(3, result)
+  # end
 
   def test_16_verify_move_instance_variable_updated_by_human_move
     game = Game.new(3)
@@ -161,58 +180,58 @@ class TestPosition < Minitest::Test
     assert_equal("t1", result)
   end
 
-  def test_17_verify_move_instance_variable_updated_by_perfect_AI_move
-    game = Game.new(3)
-    player_type = {"p1_type"=>"Human", "p2_type"=>"Perfect"}
-    game.board.game_board = ["X", "", "", "", "", "", "", "", ""]
-    game.round = 2
-    game.select_players(player_type)
-    game.set_players
-    game.m_current = "O"
-    game.ai_move
-    result = game.move
-    assert_equal("m2", result)
-  end
+  # def test_17_verify_move_instance_variable_updated_by_perfect_AI_move
+  #   game = Game.new(3)
+  #   player_type = {"p1_type"=>"Human", "p2_type"=>"Perfect"}
+  #   game.board.game_board = ["X", "", "", "", "", "", "", "", ""]
+  #   game.round = 2
+  #   game.select_players(player_type)
+  #   game.set_players
+  #   game.m_current = "O"
+  #   game.ai_move
+  #   result = game.move
+  #   assert_equal("m2", result)
+  # end
 
-  def test_18_verify_move_instance_variable_updated_by_unbeatable_AI_move
-    game = Game.new(3)
-    player_type = {"p1_type"=>"Human", "p2_type"=>"Unbeatable"}
-    game.board.game_board = ["X", "", "", "", "", "", "", "", ""]
-    game.round = 2
-    game.select_players(player_type)
-    game.set_players
-    game.m_current = "O"
-    game.ai_move
-    result = game.move
-    assert_equal("m2", result)
-  end
+  # def test_18_verify_move_instance_variable_updated_by_unbeatable_AI_move
+  #   game = Game.new(3)
+  #   player_type = {"p1_type"=>"Human", "p2_type"=>"Unbeatable"}
+  #   game.board.game_board = ["X", "", "", "", "", "", "", "", ""]
+  #   game.round = 2
+  #   game.select_players(player_type)
+  #   game.set_players
+  #   game.m_current = "O"
+  #   game.ai_move
+  #   result = game.move
+  #   assert_equal("m2", result)
+  # end
 
-  def test_19_verify_move_instance_variable_updated_by_sequential_AI_move
-    game = Game.new(3)
-    player_type = {"p1_type"=>"Human", "p2_type"=>"Sequential"}
-    game.board.game_board = ["X", "", "", "", "", "", "", "", ""]
-    game.round = 2
-    game.select_players(player_type)
-    game.set_players
-    game.m_current = "O"
-    game.ai_move
-    result = game.move
-    assert_equal("t2", result)
-  end
+  # def test_19_verify_move_instance_variable_updated_by_sequential_AI_move
+  #   game = Game.new(3)
+  #   player_type = {"p1_type"=>"Human", "p2_type"=>"Sequential"}
+  #   game.board.game_board = ["X", "", "", "", "", "", "", "", ""]
+  #   game.round = 2
+  #   game.select_players(player_type)
+  #   game.set_players
+  #   game.m_current = "O"
+  #   game.ai_move
+  #   result = game.move
+  #   assert_equal("t2", result)
+  # end
 
-  def test_20_verify_move_instance_variable_updated_by_random_AI_move
-    game = Game.new(3)
-    player_type = {"p1_type"=>"Human", "p2_type"=>"Random"}
-    game.board.game_board = ["X", "X", "O", "O", "X", "X", "O", "", ""]
-    game.round = 2
-    game.select_players(player_type)
-    game.set_players
-    game.m_current = "O"
-    game.ai_move
-    moves = ["b2", "b3"]
-    result = moves.include? game.move
-    assert_equal(true, result)
-  end
+  # def test_20_verify_move_instance_variable_updated_by_random_AI_move
+  #   game = Game.new(3)
+  #   player_type = {"p1_type"=>"Human", "p2_type"=>"Random"}
+  #   game.board.game_board = ["X", "X", "O", "O", "X", "X", "O", "", ""]
+  #   game.round = 2
+  #   game.select_players(player_type)
+  #   game.set_players
+  #   game.m_current = "O"
+  #   game.ai_move
+  #   moves = ["b2", "b3"]
+  #   result = moves.include? game.move
+  #   assert_equal(true, result)
+  # end
 
   def test_21_verify_valid_move_returns_true
     game = Game.new(3)
@@ -328,7 +347,7 @@ class TestPosition < Minitest::Test
     $x_score = 0
     game.board.game_board = ["X", "O", "X", "O", "O", "X", "", "", "X"]
     game.game_over?
-    game.messaging.win = [2, 5, 8]
+    # game.messaging.win = [2, 5, 8]
     result = game.end_game
     assert_equal("X", result)
   end
@@ -338,7 +357,7 @@ class TestPosition < Minitest::Test
     $x_score = 0
     game.board.game_board = ["X", "O", "X", "O", "O", "X", "", "", "X"]
     game.game_over?
-    game.messaging.win = [2, 5, 8]
+    # game.messaging.win = [2, 5, 8]
     game.end_game
     result = $x_score
     assert_equal(1, result)
@@ -349,7 +368,7 @@ class TestPosition < Minitest::Test
     $o_score = 0
     game.board.game_board = ["X", "O", "X", "O", "O", "O", "X", "", "X"]
     game.game_over?
-    game.messaging.win = [3, 4, 5]
+    # game.messaging.win = [3, 4, 5]
     result = game.end_game
     assert_equal("O", result)
   end
@@ -359,7 +378,7 @@ class TestPosition < Minitest::Test
     $o_score = 0
     game.board.game_board = ["X", "O", "X", "O", "O", "O", "X", "", "X"]
     game.game_over?
-    game.messaging.win = [3, 4, 5]
+    # game.messaging.win = [3, 4, 5]
     game.end_game
     result = $o_score
     assert_equal(1, result)
@@ -370,7 +389,7 @@ class TestPosition < Minitest::Test
     $x_score = 0
     game.board.game_board = ["X", "X", "O", "O", "O", "X", "X", "X", "O"]
     game.game_over?
-    game.messaging.win = []
+    # game.messaging.win = []
     result = game.end_game
     assert_equal("tie", result)
   end

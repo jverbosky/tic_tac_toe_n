@@ -45,7 +45,7 @@ class TicTacToeNApp < Sinatra::Base
     session[:messaging] = session[:game].messaging  # access messaging instance via game instance
     mark = session[:game].m_current  # collect current mark for messaging
     feedback = session[:messaging].human_messaging(round, mark)  # update intro human player messaging
-    erb :start, locals: {rows: rows, round: round, feedback: feedback}
+    erb :play_human, locals: {rows: rows, round: round, feedback: feedback}
   end
 
   # route to allow input of human player move
@@ -70,25 +70,26 @@ class TicTacToeNApp < Sinatra::Base
     if session[:game].game_over?  # if game is over
       winner = session[:game].end_game  # evaluate endgame items and collect winner for endgame messaging
       endgame_result = session[:messaging].display_results(session[:p1_type], session[:p2_type], winner)
+      round -= 1  # roll back round count to reflect winning round
       erb :game_over, layout: :min_js_layout, locals: {rows: rows, round: round, result: endgame_result}  # display final results
     elsif feedback =~ /^That/  # if feedback ~ taken position, reprompt via play_human
       erb :play_human, locals: {rows: rows, round: round, feedback: feedback}
     else  # otherwise display move results
       feedback = session[:messaging].human_messaging(round, mark)  # update human player messaging
-      erb :result_human, locals: {rows: rows, round: round, feedback: feedback}
+      erb :play_human, locals: {rows: rows, round: round, feedback: feedback}
     end
   end
 
-  # # route for front-end testing to use game_over views in /play_ai and /result_human
-  # get '/game_over_test' do
-  #   session[:game].round = 5  # use for front-end testing
-  #   session[:game].board.game_board = ["X", "X", "", "", "O", "", "O", "", ""]
-  # end
+  # route for front-end testing to verify feedback if taken position is selected
+  get '/location_taken_test' do
+    session[:game].round = 3  # use for front-end testing
+    session[:game].board.game_board = ["X", "", "", "", "O", "", "", "", ""]
+  end
 
-  # # route for front-end testing to use game_over views in /play_ai and /result_human
-  # get '/location_taken_test' do
-  #   session[:game].round = 3  # use for front-end testing
-  #   session[:game].board.game_board = ["X", "", "", "", "O", "", "", "", ""]
-  # end
+  # route for front-end testing to use game_over views in /play_ai and /result_human
+  get '/game_over_test' do
+    session[:game].round = 5  # use for front-end testing
+    session[:game].board.game_board = ["X", "X", "", "", "O", "", "O", "", ""]
+  end
 
 end

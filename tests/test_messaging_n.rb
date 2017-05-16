@@ -108,9 +108,9 @@ class TestPosition < Minitest::Test
     p1_type = "Human"
     p2_type = "Perfect"
     winner = "X"
-    messaging.win = "t1, m2, b3"
+    # messaging.win = "t1, m2, b3"
     result = messaging.display_results(p1_type, p2_type, winner)
-    assert_equal("Human X won the game!<br>The winning positions were: t1, m2, b3", result)
+    assert_equal("Human X won the game!", result)
   end
 
   def test_12_validate_endgame_results_Perfect_O_win
@@ -118,9 +118,9 @@ class TestPosition < Minitest::Test
     p1_type = "Human"
     p2_type = "Perfect"
     winner = "O"
-    messaging.win = "m1, m2, m3"
+    # messaging.win = "m1, m2, m3"
     result = messaging.display_results(p1_type, p2_type, winner)
-    assert_equal("Perfect O won the game!<br>The winning positions were: m1, m2, m3", result)
+    assert_equal("Perfect O won the game!", result)
   end
 
   def test_13_validate_endgame_results_tie
